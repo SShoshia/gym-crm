@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "firstName": "John",
+    "lastName": "Doe",
+    "username": "John.Doe",
+    "password": "1234567890",
+    "isActive": true
+  },
+  {
+    "id": 2,
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "username": "Jane.Doe",
+    "password": "1234567890",
+    "isActive": true
+  },
+  {
+    "id": 3,
+    "firstName": "Richard",
+    "lastName": "Roe",
+    "username": "Richard.Roe",
+    "password": "1234567890",
+    "isActive": false
+  }
+]
