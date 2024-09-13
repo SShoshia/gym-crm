@@ -83,7 +83,7 @@ public class DataInitializer {
 
             for (Object data : dataList) {
                 Training training = objectMapper.convertValue(data, Training.class);
-                storage.put(training.getTrainingId(), training);
+                storage.put(training.getId(), training);
             }
             logger.info("Loaded trainings from file.");
         } catch (IOException e) {

@@ -29,11 +29,11 @@ public class TrainingServiceImplTest {
         trainingDAO = Mockito.mock(TrainingDAO.class);
         trainingService = new TrainingServiceImpl(trainingDAO);
         sampleTraining1 = new Training();
-        sampleTraining1.setTrainingId(1L);
+        sampleTraining1.setId(1L);
         sampleTraining1.setTraineeId(1L);
         sampleTraining1.setTrainerId(1L);
         sampleTraining2 = new Training();
-        sampleTraining2.setTrainingId(2L);
+        sampleTraining2.setId(2L);
         sampleTraining2.setTraineeId(2L);
         sampleTraining2.setTrainerId(2L);
     }

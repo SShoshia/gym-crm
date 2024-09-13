@@ -70,7 +70,7 @@ public class InMemoryTrainingDAOTest {
         traineeStorage.put(1L, sampleTrainee1);
         trainerStorage.put(2L, sampleTrainer2);
         trainingDAO.create(sampleTraining1);
-        assertNotNull(sampleTraining1.getTrainingId());
+        assertNotNull(sampleTraining1.getId());
         assertEquals(1, trainingStorage.size());
     }
 
@@ -79,9 +79,9 @@ public class InMemoryTrainingDAOTest {
         traineeStorage.put(1L, sampleTrainee1);
         trainerStorage.put(2L, sampleTrainer2);
         trainingDAO.create(sampleTraining1);
-        val foundTraining = trainingDAO.findById(sampleTraining1.getTrainingId());
+        val foundTraining = trainingDAO.findById(sampleTraining1.getId());
         assertTrue(foundTraining.isPresent());
-        assertEquals(1L, foundTraining.get().getTrainingId());
+        assertEquals(1L, foundTraining.get().getId());
     }
 
     @Test
@@ -94,8 +94,8 @@ public class InMemoryTrainingDAOTest {
         trainingDAO.create(sampleTraining2);
         val allTrainings = trainingDAO.findAll();
         assertEquals(2, allTrainings.size());
-        assertEquals(1L, allTrainings.get(0).getTrainingId());
-        assertEquals(2L, allTrainings.get(1).getTrainingId());
+        assertEquals(1L, allTrainings.get(0).getId());
+        assertEquals(2L, allTrainings.get(1).getId());
     }
 
     @Test
@@ -103,7 +103,7 @@ public class InMemoryTrainingDAOTest {
         traineeStorage.put(1L, sampleTrainee1);
         trainerStorage.put(2L, sampleTrainer2);
         trainingDAO.create(sampleTraining1);
-        val id = sampleTraining1.getTrainingId();
+        val id = sampleTraining1.getId();
 
         trainingDAO.delete(id);
         assertFalse(trainingDAO.findById(id).isPresent());

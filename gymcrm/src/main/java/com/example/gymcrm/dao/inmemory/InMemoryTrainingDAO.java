@@ -41,7 +41,7 @@ public class InMemoryTrainingDAO implements TrainingDAO {
             while (trainingStorage.containsKey(id)) {
                 id = idCounter.getAndIncrement();
             }
-            training.setTrainingId(id);
+            training.setId(id);
             trainingStorage.put(id, training);
             logger.info("Created Training {}", training);
         } else {

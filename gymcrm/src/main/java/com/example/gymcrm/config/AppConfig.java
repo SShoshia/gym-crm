@@ -23,7 +23,7 @@ import java.util.Map;
 
 @Configuration
 @PropertySource("classpath:application.properties")
-@Import({StorageConfig.class, DAOConfig.class, ServiceConfig.class})
+@Import({StorageConfig.class, DAOConfig.class, ServiceConfig.class, HibernateConfig.class})
 public class AppConfig {
 
     @Bean
