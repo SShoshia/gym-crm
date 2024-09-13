@@ -1,6 +1,10 @@
 package service;
 
+import com.example.gymcrm.dao.core.TraineeDAO;
+import com.example.gymcrm.dao.core.TrainerDAO;
 import com.example.gymcrm.dao.core.TrainingDAO;
+import com.example.gymcrm.model.Trainee;
+import com.example.gymcrm.model.Trainer;
 import com.example.gymcrm.model.Training;
 import com.example.gymcrm.service.core.TrainingService;
 import com.example.gymcrm.service.impl.TrainingServiceImpl;
@@ -19,6 +23,8 @@ import static org.mockito.Mockito.*;
 public class TrainingServiceImplTest {
 
     private TrainingDAO trainingDAO;
+    private TraineeDAO traineeDAO;
+    private TrainerDAO trainerDAO;
     private TrainingService trainingService;
 
     private Training sampleTraining1;
@@ -27,19 +33,23 @@ public class TrainingServiceImplTest {
     @BeforeEach
     public void setUp() {
         trainingDAO = Mockito.mock(TrainingDAO.class);
-        trainingService = new TrainingServiceImpl(trainingDAO);
+        traineeDAO = Mockito.mock(TraineeDAO.class);
+        trainerDAO = Mockito.mock(TrainerDAO.class);
+        trainingService = new TrainingServiceImpl(trainingDAO, traineeDAO, trainerDAO);
         sampleTraining1 = new Training();
-        sampleTraining1.setTrainingId(1L);
+        sampleTraining1.setId(1L);
         sampleTraining1.setTraineeId(1L);
         sampleTraining1.setTrainerId(1L);
         sampleTraining2 = new Training();
-        sampleTraining2.setTrainingId(2L);
+        sampleTraining2.setId(2L);
         sampleTraining2.setTraineeId(2L);
         sampleTraining2.setTrainerId(2L);
     }
 
     @Test
     public void testCreateTrainingCallsDaoMethodOnArgument() {
+        when(traineeDAO.findById(sampleTraining1.getTraineeId())).thenReturn(Optional.of(new Trainee()));
+        when(trainerDAO.findById(sampleTraining1.getTrainerId())).thenReturn(Optional.of(new Trainer()));
         trainingService.createTraining(sampleTraining1);
         verify(trainingDAO, times(1)).create(sampleTraining1);
     }

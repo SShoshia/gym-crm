@@ -10,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Training {
-    private Long trainingId;
+    private Long id;
     private Long traineeId;
     private Long trainerId;
     private String trainingName;

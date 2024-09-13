@@ -1,8 +1,11 @@
 package com.example.gymcrm.service.impl;
 
 import com.example.gymcrm.dao.core.TrainerDAO;
+import com.example.gymcrm.dao.core.UserDAO;
 import com.example.gymcrm.model.Trainer;
 import com.example.gymcrm.service.core.TrainerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +15,24 @@ import java.util.Optional;
 @Service
 public class TrainerServiceImpl implements TrainerService {
 
+    private static final Logger logger = LoggerFactory.getLogger(TrainerServiceImpl.class);
+
     private final TrainerDAO trainerDAO;
+    private final UserDAO userDAO;
 
     @Autowired
-    public TrainerServiceImpl(TrainerDAO trainerDAO) {
+    public TrainerServiceImpl(TrainerDAO trainerDAO, UserDAO userDAO) {
         this.trainerDAO = trainerDAO;
+        this.userDAO = userDAO;
     }
 
     @Override
     public void createTrainer(Trainer trainer) {
-        trainerDAO.create(trainer);
+        if (userDAO.findById(trainer.getUserId()).isPresent()) {
+            trainerDAO.create(trainer);
+        } else {
+            error("User with provided userId not found. Trainer: " + trainer);
+        }
     }
 
     @Override
@@ -42,5 +53,10 @@ public class TrainerServiceImpl implements TrainerService {
     @Override
     public void deleteTrainer(Long id) {
         trainerDAO.delete(id);
+    }
+
+    private void error(String errorMessage) {
+        logger.error(errorMessage);
+        throw new RuntimeException(errorMessage);
     }
 }

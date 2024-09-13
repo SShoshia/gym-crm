@@ -68,14 +68,24 @@ public class UserServiceImplTest {
 
     @Test
     public void testUpdateUserCallsDaoMethodOnArgument() {
+        when(userDAO.findById(sampleUser1.getId())).thenReturn(Optional.of(sampleUser1));
+
         userService.updateUser(sampleUser1);
         verify(userDAO, times(1)).update(sampleUser1);
     }
 
     @Test
     public void testDeleteUserCallsDaoMethodOnArgument() {
+        when(userDAO.findById(sampleUser1.getId())).thenReturn(Optional.of(sampleUser1));
+
         userService.deleteUser(1L);
         verify(userDAO, times(1)).delete(1L);
     }
 
+    @Test
+    public void testCreateUserSetsCorrectUsernameAndPassword() {
+        userService.createUser(sampleUser1);
+        assertEquals(sampleUser1.getFirstName() + "." + sampleUser1.getLastName(), sampleUser1.getUsername());
+        assertEquals(10, sampleUser1.getPassword().length());
+    }
 }

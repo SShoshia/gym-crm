@@ -1,7 +1,9 @@
 package service;
 
 import com.example.gymcrm.dao.core.TrainerDAO;
+import com.example.gymcrm.dao.core.UserDAO;
 import com.example.gymcrm.model.Trainer;
+import com.example.gymcrm.model.User;
 import com.example.gymcrm.service.core.TrainerService;
 import com.example.gymcrm.service.impl.TrainerServiceImpl;
 import lombok.val;
@@ -12,13 +14,13 @@ import org.mockito.Mockito;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class TrainerServiceImplTest {
 
     private TrainerDAO trainerDAO;
+    private UserDAO userDAO;
     private TrainerService trainerService;
 
     private Trainer sampleTrainer1;
@@ -27,7 +29,8 @@ public class TrainerServiceImplTest {
     @BeforeEach
     public void setUp() {
         trainerDAO = Mockito.mock(TrainerDAO.class);
-        trainerService = new TrainerServiceImpl(trainerDAO);
+        userDAO = Mockito.mock(UserDAO.class);
+        trainerService = new TrainerServiceImpl(trainerDAO, userDAO);
 
         sampleTrainer1 = new Trainer();
         sampleTrainer1.setId(1L);
@@ -41,8 +44,15 @@ public class TrainerServiceImplTest {
 
     @Test
     public void testCreateTrainerCallsDaoMethodOnArgument() {
+        when(userDAO.findById(sampleTrainer1.getUserId())).thenReturn(Optional.of(new User()));
         trainerService.createTrainer(sampleTrainer1);
         verify(trainerDAO, times(1)).create(sampleTrainer1);
+    }
+
+    @Test
+    public void testCreateTrainerWithNoUser() {
+        when(userDAO.findById(sampleTrainer1.getUserId())).thenReturn(Optional.empty());
+        assertThrows(RuntimeException.class, () -> trainerService.createTrainer(sampleTrainer1));
     }
 
     @Test

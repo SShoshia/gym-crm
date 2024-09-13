@@ -24,18 +24,18 @@ public class ServiceConfig {
     }
 
     @Bean
-    public TraineeService traineeService(TraineeDAO traineeDAO) {
-        return new TraineeServiceImpl(traineeDAO);
+    public TraineeService traineeService(TraineeDAO traineeDAO, UserDAO userDAO) {
+        return new TraineeServiceImpl(traineeDAO, userDAO);
     }
 
     @Bean
-    public TrainerService trainerService(TrainerDAO trainerDAO) {
-        return new TrainerServiceImpl(trainerDAO);
+    public TrainerService trainerService(TrainerDAO trainerDAO, UserDAO userDAO) {
+        return new TrainerServiceImpl(trainerDAO, userDAO);
     }
 
     @Bean
-    public TrainingService trainingService(TrainingDAO trainingDAO) {
-        return new TrainingServiceImpl(trainingDAO);
+    public TrainingService trainingService(TrainingDAO trainingDAO, TraineeDAO traineeDAO, TrainerDAO trainerDAO) {
+        return new TrainingServiceImpl(trainingDAO, traineeDAO, trainerDAO);
     }
 
 }

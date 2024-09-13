@@ -2,7 +2,6 @@ package com.example.gymcrm.dao.inmemory;
 
 import com.example.gymcrm.dao.core.TrainerDAO;
 import com.example.gymcrm.model.Trainer;
-import com.example.gymcrm.model.User;
 import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,30 +19,24 @@ public class InMemoryTrainerDAO implements TrainerDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(InMemoryTrainerDAO.class);
 
-    private final Map<Long, User> userStorage;
     private final Map<Long, Trainer> trainerStorage;
     private final AtomicLong idCounter = new AtomicLong(1);
 
     @Autowired
-    public InMemoryTrainerDAO(Map<Long, User> userStorage, Map<Long, Trainer> trainerStorage) {
-        this.userStorage = userStorage;
+    public InMemoryTrainerDAO(Map<Long, Trainer> trainerStorage) {
         this.trainerStorage = trainerStorage;
         logger.info("Initialized InMemoryTrainerDAO");
     }
 
     @Override
     public synchronized void create(Trainer trainer) {
-        if (userStorage.containsKey(trainer.getUserId())) {
-            Long id = idCounter.getAndIncrement();
-            while (trainerStorage.containsKey(id)) {
-                id = idCounter.getAndIncrement();
-            }
-            trainer.setId(id);
-            trainerStorage.put(id, trainer);
-            logger.info("Created Trainer {}", trainer);
-        } else {
-            logger.error("User with userId not found. Trainer: {}", trainer);
+        Long id = idCounter.getAndIncrement();
+        while (trainerStorage.containsKey(id)) {
+            id = idCounter.getAndIncrement();
         }
+        trainer.setId(id);
+        trainerStorage.put(id, trainer);
+        logger.info("Created Trainer {}", trainer);
     }
 
     @Override

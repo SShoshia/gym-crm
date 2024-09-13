@@ -2,7 +2,6 @@ package dao;
 
 import com.example.gymcrm.dao.inmemory.InMemoryTraineeDAO;
 import com.example.gymcrm.model.Trainee;
-import com.example.gymcrm.model.User;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,29 +14,15 @@ import static org.junit.jupiter.api.Assertions.*;
 public class InMemoryTraineeDAOTest {
 
     private InMemoryTraineeDAO traineeDAO;
-    private Map<Long, User> userStorage;
     private Map<Long, Trainee> traineeStorage;
-
-    private User sampleUser1;
-    private User sampleUser2;
 
     private Trainee sampleTrainee1;
     private Trainee sampleTrainee2;
 
     @BeforeEach
     public void setup() {
-        userStorage = new ConcurrentHashMap<>();
         traineeStorage = new ConcurrentHashMap<>();
-        traineeDAO = new InMemoryTraineeDAO(userStorage, traineeStorage);
-
-        sampleUser1 = new User();
-        sampleUser1.setId(1L);
-        sampleUser1.setFirstName("John");
-        sampleUser1.setLastName("Doe");
-        sampleUser2 = new User();
-        sampleUser2.setId(2L);
-        sampleUser2.setFirstName("Jane");
-        sampleUser2.setLastName("Doe");
+        traineeDAO = new InMemoryTraineeDAO(traineeStorage);
 
         sampleTrainee1 = new Trainee();
         sampleTrainee1.setId(1L);
@@ -51,21 +36,13 @@ public class InMemoryTraineeDAOTest {
 
     @Test
     public void testCreateTrainee() {
-        userStorage.put(1L, sampleUser1);
         traineeDAO.create(sampleTrainee1);
         assertNotNull(sampleTrainee1.getId());
         assertEquals(1, traineeStorage.size());
     }
 
     @Test
-    public void testCreateTraineeWithNoUser() {
-        traineeDAO.create(sampleTrainee1);
-        assertEquals(0, traineeStorage.size());
-    }
-
-    @Test
     public void testFindById() {
-        userStorage.put(1L, sampleUser1);
         traineeDAO.create(sampleTrainee1);
         val foundTrainee = traineeDAO.findById(sampleTrainee1.getId());
         assertTrue(foundTrainee.isPresent());
@@ -74,8 +51,6 @@ public class InMemoryTraineeDAOTest {
 
     @Test
     public void testFindAll() {
-        userStorage.put(1L, sampleUser1);
-        userStorage.put(2L, sampleUser2);
         traineeDAO.create(sampleTrainee1);
         traineeDAO.create(sampleTrainee2);
         val allTrainees = traineeDAO.findAll();
@@ -86,7 +61,6 @@ public class InMemoryTraineeDAOTest {
 
     @Test
     public void testUpdateTrainee() {
-        userStorage.put(1L, sampleUser1);
         traineeDAO.create(sampleTrainee1);
         sampleTrainee1.setAddress("void");
         traineeDAO.update(sampleTrainee1);
@@ -98,7 +72,6 @@ public class InMemoryTraineeDAOTest {
 
     @Test
     public void testDeleteTrainee() {
-        userStorage.put(1L, sampleUser1);
         traineeDAO.create(sampleTrainee1);
         val id = sampleTrainee1.getId();
 

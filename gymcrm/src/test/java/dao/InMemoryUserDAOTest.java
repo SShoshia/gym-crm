@@ -42,13 +42,6 @@ public class InMemoryUserDAOTest {
     }
 
     @Test
-    public void testCreateUserSetsCorrectUsernameAndPassword() {
-        userDAO.create(sampleUser1);
-        assertEquals(sampleUser1.getFirstName() + "." + sampleUser1.getLastName(), sampleUser1.getUsername());
-        assertEquals(10, sampleUser1.getPassword().length());
-    }
-
-    @Test
     public void testFindById() {
         userDAO.create(sampleUser1);
         val foundUser = userDAO.findById(sampleUser1.getId());

@@ -22,7 +22,6 @@ public class InMemoryUserDAO implements UserDAO {
     private final Map<Long, User> userStorage;
 
     private final AtomicLong idCounter = new AtomicLong(1);
-    private final AtomicLong usernameCounter = new AtomicLong(1);
 
     @Autowired
     public InMemoryUserDAO(Map<Long, User> userStorage) {
@@ -37,25 +36,9 @@ public class InMemoryUserDAO implements UserDAO {
             id = idCounter.getAndIncrement();
         }
         user.setId(id);
-        logger.info("Creating user with id {}", id);
-
-        if (user.getUsername() == null) {
-            String username = User.generateUsername(user.getFirstName(), user.getLastName());
-            boolean usernameExists = findByUsername(username).isPresent();
-            if (usernameExists) {
-                username = username + usernameCounter.getAndIncrement();
-            }
-            user.setUsername(username);
-            logger.info("Set username to {} for user with id {}.", username, id);
-        }
-
-        if (user.getPassword() == null) {
-            user.setPassword(User.generatePassword());
-            logger.info("Set random {}-symbol password for user with id {}.", user.getPassword().length(), id);
-        }
 
         userStorage.put(id, user);
-        logger.info("Created user with id {}", id);
+        logger.info("Created user {}", user);
     }
 
     @Override
@@ -81,12 +64,8 @@ public class InMemoryUserDAO implements UserDAO {
 
     @Override
     public synchronized void update(User user) {
-        if (user.getId() != null && userStorage.containsKey(user.getId())) {
-            userStorage.put(user.getId(), user);
-            logger.info("Updated User {}", user);
-        } else {
-            logger.error("User with specified ID not found. ID: {}", user.getId());
-        }
+        userStorage.put(user.getId(), user);
+        logger.info("Updated User {}", user);
     }
 
     @Override
