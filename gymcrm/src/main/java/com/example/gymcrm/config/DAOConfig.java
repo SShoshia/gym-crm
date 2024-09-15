@@ -26,18 +26,18 @@ public class DAOConfig {
     }
 
     @Bean
-    public TraineeDAO traineeDAO(Map<Long, User> userStorage, Map<Long, Trainee> traineeStorage) {
-        return new InMemoryTraineeDAO(userStorage, traineeStorage);
+    public TraineeDAO traineeDAO(Map<Long, Trainee> traineeStorage) {
+        return new InMemoryTraineeDAO(traineeStorage);
     }
 
     @Bean
-    public TrainerDAO trainerDAO(Map<Long, User> userStorage, Map<Long, Trainer> trainerStorage) {
-        return new InMemoryTrainerDAO(userStorage, trainerStorage);
+    public TrainerDAO trainerDAO(Map<Long, Trainer> trainerStorage) {
+        return new InMemoryTrainerDAO(trainerStorage);
     }
 
     @Bean
-    public TrainingDAO trainingDAO(Map<Long, Trainer> trainerStorage, Map<Long, Trainee> traineeStorage, Map<Long, Training> trainingStorage) {
-        return new InMemoryTrainingDAO(trainerStorage, traineeStorage, trainingStorage);
+    public TrainingDAO trainingDAO(Map<Long, Training> trainingStorage) {
+        return new InMemoryTrainingDAO(trainingStorage);
     }
 
 }

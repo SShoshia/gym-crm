@@ -21,14 +21,15 @@ public class DataInitializer {
     private static final Logger logger = LoggerFactory.getLogger(DataInitializer.class);
 
     private final FileService fileService;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public DataInitializer(FileService fileService) {
+    public DataInitializer(FileService fileService, ObjectMapper objectMapper) {
         this.fileService = fileService;
+        this.objectMapper = objectMapper;
     }
 
     public void loadUsersFromFile(String filePath, Map<Long, User> storage) {
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             String jsonData = fileService.readFileFromResources(filePath);
             List<?> dataList = objectMapper.readValue(jsonData, List.class);
@@ -44,7 +45,6 @@ public class DataInitializer {
     }
 
     public void loadTraineesFromFile(String filePath, Map<Long, Trainee> storage) {
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             String jsonData = fileService.readFileFromResources(filePath);
             List<?> dataList = objectMapper.readValue(jsonData, List.class);
@@ -60,7 +60,6 @@ public class DataInitializer {
     }
 
     public void loadTrainersFromFile(String filePath, Map<Long, Trainer> storage) {
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             String jsonData = fileService.readFileFromResources(filePath);
             List<?> dataList = objectMapper.readValue(jsonData, List.class);
@@ -76,7 +75,6 @@ public class DataInitializer {
     }
 
     public void loadTrainingsFromFile(String filePath, Map<Long, Training> storage) {
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             String jsonData = fileService.readFileFromResources(filePath);
             List<?> dataList = objectMapper.readValue(jsonData, List.class);

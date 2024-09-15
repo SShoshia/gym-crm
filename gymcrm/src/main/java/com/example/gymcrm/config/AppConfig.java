@@ -10,10 +10,11 @@ import com.example.gymcrm.model.Trainee;
 import com.example.gymcrm.model.Trainer;
 import com.example.gymcrm.model.Training;
 import com.example.gymcrm.model.User;
-import com.example.gymcrm.service.core.TrainerService;
 import com.example.gymcrm.service.core.TraineeService;
+import com.example.gymcrm.service.core.TrainerService;
 import com.example.gymcrm.service.core.TrainingService;
 import com.example.gymcrm.service.core.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -37,8 +38,13 @@ public class AppConfig {
     }
 
     @Bean
-    public DataInitializer dataInitializer(FileService fileService) {
-        return new DataInitializer(fileService);
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
+    }
+
+    @Bean
+    public DataInitializer dataInitializer(FileService fileService, ObjectMapper objectMapper) {
+        return new DataInitializer(fileService, objectMapper);
     }
 
     @Bean
