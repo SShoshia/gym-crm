@@ -28,7 +28,7 @@ public class TraineeServiceImpl implements TraineeService {
 
     @Override
     public void createTrainee(Trainee trainee) {
-        if(userDAO.findById(trainee.getUserId()).isPresent()) {
+        if (userDAO.findById(trainee.getUserId()).isPresent()) {
             traineeDAO.create(trainee);
         } else {
             error("User with provided userId not found. Trainee: " + trainee);
@@ -47,7 +47,12 @@ public class TraineeServiceImpl implements TraineeService {
 
     @Override
     public void updateTrainee(Trainee trainee) {
-        traineeDAO.update(trainee);
+        if (trainee.getId() != null && traineeDAO.findById(trainee.getId()).isPresent() &&
+                trainee.getUserId() != null && userDAO.findById(trainee.getUserId()).isPresent()) {
+            traineeDAO.update(trainee);
+        } else {
+            error("Error while updating trainee. Trainee: " + trainee);
+        }
     }
 
     @Override
