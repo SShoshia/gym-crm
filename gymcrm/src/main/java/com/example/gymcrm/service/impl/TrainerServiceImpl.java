@@ -47,7 +47,12 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public void updateTrainer(Trainer trainer) {
-        trainerDAO.update(trainer);
+        if (trainer.getId() != null && trainerDAO.findById(trainer.getId()).isPresent() &&
+                trainer.getUserId() != null && userDAO.findById(trainer.getUserId()).isPresent()) {
+            trainerDAO.update(trainer);
+        } else {
+            error("Error while updating trainer. Trainer: " + trainer);
+        }
     }
 
     @Override

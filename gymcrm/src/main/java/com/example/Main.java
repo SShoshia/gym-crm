@@ -24,21 +24,21 @@ public class Main {
         facade.createUser(user);
 
         Trainee trainee = new Trainee();
-        trainee.setUserId(user.getId());
+        trainee.setUser(user);
         trainee.setAddress("Example Address");
         trainee.setDateOfBirth(new Date());
 
         facade.createTrainee(trainee);
 
         Trainer trainer = new Trainer();
-        trainer.setUserId(1L);
+        trainer.setUser(facade.getUser(1L).get());
         trainer.setSpecialization("Specialization");
 
         facade.createTrainer(trainer);
 
         Training training = new Training();
-        training.setTraineeId(trainee.getId());
-        training.setTrainerId(trainer.getId());
+        training.setTrainee(trainee);
+        training.setTrainer(trainer);
         training.setTrainingName("Training Name");
         training.setTrainingDate(new Date());
         training.setTrainingDuration(5);

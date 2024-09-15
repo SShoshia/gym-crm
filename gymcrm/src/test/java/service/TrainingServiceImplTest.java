@@ -11,6 +11,7 @@ import com.example.gymcrm.service.impl.TrainingServiceImpl;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.List;
@@ -36,14 +37,15 @@ public class TrainingServiceImplTest {
         traineeDAO = Mockito.mock(TraineeDAO.class);
         trainerDAO = Mockito.mock(TrainerDAO.class);
         trainingService = new TrainingServiceImpl(trainingDAO, traineeDAO, trainerDAO);
-        sampleTraining1 = new Training();
-        sampleTraining1.setId(1L);
-        sampleTraining1.setTraineeId(1L);
-        sampleTraining1.setTrainerId(1L);
-        sampleTraining2 = new Training();
-        sampleTraining2.setId(2L);
-        sampleTraining2.setTraineeId(2L);
-        sampleTraining2.setTrainerId(2L);
+
+        sampleTraining1 = mock(Training.class);
+        when(sampleTraining1.getId()).thenReturn(1L);
+        when(sampleTraining1.getTraineeId()).thenReturn(1L);
+        when(sampleTraining1.getTrainerId()).thenReturn(1L);
+        sampleTraining2 = mock(Training.class);
+        when(sampleTraining2.getId()).thenReturn(2L);
+        when(sampleTraining2.getTraineeId()).thenReturn(2L);
+        when(sampleTraining2.getTrainerId()).thenReturn(2L);
     }
 
     @Test

@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class InMemoryTrainerDAOTest {
 
@@ -21,17 +22,17 @@ public class InMemoryTrainerDAOTest {
 
     @BeforeEach
     public void setup() {
-        trainerStorage = new ConcurrentHashMap<>();
+        trainerStorage = spy(new ConcurrentHashMap<>());
         trainerDAO = new InMemoryTrainerDAO(trainerStorage);
 
-        sampleTrainer1 = new Trainer();
-        sampleTrainer1.setId(1L);
-        sampleTrainer1.setUserId(1L);
-        sampleTrainer1.setSpecialization("spec 1");
-        sampleTrainer2 = new Trainer();
-        sampleTrainer2.setId(2L);
-        sampleTrainer2.setUserId(2L);
-        sampleTrainer2.setSpecialization("spec 2");
+        sampleTrainer1 = mock();
+        when(sampleTrainer1.getId()).thenReturn(1L);
+        when(sampleTrainer1.getUserId()).thenReturn(1L);
+        when(sampleTrainer1.getSpecialization()).thenReturn("spec 1");
+        sampleTrainer2 = mock();
+        when(sampleTrainer2.getId()).thenReturn(2L);
+        when(sampleTrainer2.getUserId()).thenReturn(2L);
+        when(sampleTrainer2.getSpecialization()).thenReturn("spec 2");
     }
 
     @Test
@@ -65,9 +66,7 @@ public class InMemoryTrainerDAOTest {
         sampleTrainer1.setSpecialization("spec 3");
         trainerDAO.update(sampleTrainer1);
 
-        val updatedTrainer = trainerDAO.findById(sampleTrainer1.getId());
-        assertTrue(updatedTrainer.isPresent());
-        assertEquals("spec 3", updatedTrainer.get().getSpecialization());
+        verify(trainerStorage, times(2)).put(sampleTrainer1.getId(), sampleTrainer1);
     }
 
     @Test

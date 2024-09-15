@@ -22,4 +22,8 @@ public class Trainee {
 
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
+
+    public Long getUserId() {
+        return user.getId();
+    }
 }

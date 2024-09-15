@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class InMemoryTrainingDAOTest {
 
@@ -24,15 +26,17 @@ public class InMemoryTrainingDAOTest {
         trainingStorage = new ConcurrentHashMap<>();
         trainingDAO = new InMemoryTrainingDAO(trainingStorage);
 
-        sampleTraining1 = new Training();
-        sampleTraining1.setTrainingName("training 1");
-        sampleTraining1.setTraineeId(1L);
-        sampleTraining1.setTrainerId(2L);
+        sampleTraining1 = mock();
+        when(sampleTraining1.getId()).thenReturn(1L);
+        when(sampleTraining1.getTrainingName()).thenReturn("training 1");
+        when(sampleTraining1.getTraineeId()).thenReturn(1L);
+        when(sampleTraining1.getTrainerId()).thenReturn(2L);
 
-        sampleTraining2 = new Training();
-        sampleTraining2.setTrainingName("training 2");
-        sampleTraining2.setTraineeId(2L);
-        sampleTraining2.setTrainerId(1L);
+        sampleTraining2 = mock();
+        when(sampleTraining2.getId()).thenReturn(2L);
+        when(sampleTraining2.getTrainingName()).thenReturn("training 2");
+        when(sampleTraining2.getTraineeId()).thenReturn(2L);
+        when(sampleTraining2.getTrainerId()).thenReturn(1L);
     }
 
     @Test

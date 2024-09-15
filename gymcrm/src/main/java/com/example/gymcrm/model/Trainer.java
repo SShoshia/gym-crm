@@ -17,4 +17,8 @@ public class Trainer {
     private User user;
 
     private String specialization;
+
+    public Long getUserId() {
+        return user.getId();
+    }
 }

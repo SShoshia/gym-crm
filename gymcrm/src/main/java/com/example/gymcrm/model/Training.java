@@ -32,4 +32,12 @@ public class Training {
     private Date trainingDate;
 
     private int trainingDuration;
+
+    public Long getTraineeId() {
+        return trainee.getId();
+    }
+
+    public Long getTrainerId() {
+        return trainer.getId();
+    }
 }

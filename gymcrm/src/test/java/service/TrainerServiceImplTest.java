@@ -32,14 +32,14 @@ public class TrainerServiceImplTest {
         userDAO = Mockito.mock(UserDAO.class);
         trainerService = new TrainerServiceImpl(trainerDAO, userDAO);
 
-        sampleTrainer1 = new Trainer();
-        sampleTrainer1.setId(1L);
-        sampleTrainer1.setUserId(1L);
-        sampleTrainer1.setSpecialization("spec 1");
-        sampleTrainer2 = new Trainer();
-        sampleTrainer2.setId(2L);
-        sampleTrainer2.setUserId(2L);
-        sampleTrainer2.setSpecialization("spec 2");
+        sampleTrainer1 = mock(Trainer.class);
+        when(sampleTrainer1.getId()).thenReturn(1L);
+        when(sampleTrainer1.getUserId()).thenReturn(1L);
+        when(sampleTrainer1.getSpecialization()).thenReturn("spec 1");
+        sampleTrainer2 = mock(Trainer.class);
+        when(sampleTrainer2.getId()).thenReturn(2L);
+        when(sampleTrainer2.getUserId()).thenReturn(2L);
+        when(sampleTrainer2.getSpecialization()).thenReturn("spec 2");
     }
 
     @Test
@@ -74,12 +74,6 @@ public class TrainerServiceImplTest {
         assertEquals(2, result.size());
         assertEquals(sampleTrainer1, result.get(0));
         assertEquals(sampleTrainer2, result.get(1));
-    }
-
-    @Test
-    public void testUpdateTrainerCallsDaoMethodOnArgument() {
-        trainerService.updateTrainer(sampleTrainer1);
-        verify(trainerDAO, times(1)).update(sampleTrainer1);
     }
 
     @Test

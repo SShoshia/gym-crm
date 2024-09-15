@@ -56,12 +56,8 @@ public class InMemoryTraineeDAO implements TraineeDAO {
 
     @Override
     public synchronized void update(Trainee trainee) {
-        if (trainee.getUserId() != null && traineeStorage.containsKey(trainee.getUserId())) {
-            traineeStorage.put(trainee.getUserId(), trainee);
-            logger.info("Updated Trainee {}", trainee);
-        } else {
-            logger.error("Trainee with specified ID not found. ID: {}", trainee.getId());
-        }
+        traineeStorage.put(trainee.getUserId(), trainee);
+        logger.info("Updated Trainee {}", trainee);
     }
 
     @Override

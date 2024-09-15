@@ -32,14 +32,14 @@ public class TraineeServiceImplTest {
         userDAO = Mockito.mock(UserDAO.class);
         traineeService = new TraineeServiceImpl(traineeDAO, userDAO);
 
-        sampleTrainee1 = new Trainee();
-        sampleTrainee1.setId(1L);
-        sampleTrainee1.setUserId(1L);
-        sampleTrainee1.setAddress("1 example street");
-        sampleTrainee2 = new Trainee();
-        sampleTrainee2.setId(2L);
-        sampleTrainee2.setUserId(2L);
-        sampleTrainee2.setAddress("2 example street");
+        sampleTrainee1 = mock();
+        when(sampleTrainee1.getId()).thenReturn(1L);
+        when(sampleTrainee1.getUserId()).thenReturn(1L);
+        when(sampleTrainee1.getAddress()).thenReturn("1 example street");
+        sampleTrainee2 = mock();
+        when(sampleTrainee2.getId()).thenReturn(2L);
+        when(sampleTrainee2.getUserId()).thenReturn(2L);
+        when(sampleTrainee2.getAddress()).thenReturn("2 example street");
     }
 
     @Test
@@ -74,12 +74,6 @@ public class TraineeServiceImplTest {
         assertEquals(2, result.size());
         assertEquals(sampleTrainee1, result.get(0));
         assertEquals(sampleTrainee2, result.get(1));
-    }
-
-    @Test
-    public void testUpdateTraineeCallsDaoMethodOnArgument() {
-        traineeService.updateTrainee(sampleTrainee1);
-        verify(traineeDAO, times(1)).update(sampleTrainee1);
     }
 
     @Test

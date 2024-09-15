@@ -55,12 +55,8 @@ public class InMemoryTrainerDAO implements TrainerDAO {
 
     @Override
     public synchronized void update(Trainer trainer) {
-        if (trainer.getUserId() != null && trainerStorage.containsKey(trainer.getUserId())) {
-            trainerStorage.put(trainer.getUserId(), trainer);
-            logger.info("Updated Trainer {}", trainer);
-        } else {
-            logger.error("Trainer with specified ID not found. ID: {}", trainer.getId());
-        }
+        trainerStorage.put(trainer.getUserId(), trainer);
+        logger.info("Updated Trainer {}", trainer);
     }
 
     @Override
