@@ -77,6 +77,16 @@ public class TrainerServiceImplTest {
     }
 
     @Test
+    public void testUpdateTrainerCallsDaoMethodOnArgument() {
+        when(userDAO.findById(sampleTrainer1.getUserId())).thenReturn(Optional.of(new User()));
+        when(trainerDAO.findById(sampleTrainer1.getId())).thenReturn(Optional.of(sampleTrainer1));
+        trainerService.createTrainer(sampleTrainer1);
+
+        trainerService.updateTrainer(sampleTrainer1);
+        verify(trainerDAO, times(1)).update(sampleTrainer1);
+    }
+
+    @Test
     public void testDeleteTrainerCallsDaoMethodOnArgument() {
         trainerService.deleteTrainer(1L);
         verify(trainerDAO, times(1)).delete(1L);

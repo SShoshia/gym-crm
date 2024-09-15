@@ -77,6 +77,16 @@ public class TraineeServiceImplTest {
     }
 
     @Test
+    public void testUpdateTraineeCallsDaoMethodOnArgument() {
+        when(userDAO.findById(sampleTrainee1.getUserId())).thenReturn(Optional.of(new User()));
+        when(traineeDAO.findById(sampleTrainee1.getId())).thenReturn(Optional.of(sampleTrainee1));
+        traineeService.createTrainee(sampleTrainee1);
+
+        traineeService.updateTrainee(sampleTrainee1);
+        verify(traineeDAO, times(1)).update(sampleTrainee1);
+    }
+
+    @Test
     public void testDeleteTraineeCallsDaoMethodOnArgument() {
         traineeService.deleteTrainee(1L);
         verify(traineeDAO, times(1)).delete(1L);
