@@ -2,10 +2,10 @@ package com.example;
 
 import com.example.gymcrm.config.AppConfig;
 import com.example.gymcrm.facade.GymCRMFacade;
-import com.example.gymcrm.model.Trainee;
-import com.example.gymcrm.model.Trainer;
-import com.example.gymcrm.model.Training;
-import com.example.gymcrm.model.User;
+import com.example.gymcrm.model.entity.Trainee;
+import com.example.gymcrm.model.entity.Trainer;
+import com.example.gymcrm.model.entity.Training;
+import com.example.gymcrm.model.entity.User;
 import jakarta.transaction.Transactional;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

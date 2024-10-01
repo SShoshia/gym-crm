@@ -1,7 +1,7 @@
 package com.example.gymcrm.auth;
 
 import com.example.gymcrm.dao.core.UserDAO;
-import com.example.gymcrm.model.User;
+import com.example.gymcrm.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

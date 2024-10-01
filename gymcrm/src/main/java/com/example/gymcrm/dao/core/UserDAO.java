@@ -1,6 +1,6 @@
 package com.example.gymcrm.dao.core;
 
-import com.example.gymcrm.model.User;
+import com.example.gymcrm.model.entity.User;
 
 import java.util.List;
 import java.util.Optional;

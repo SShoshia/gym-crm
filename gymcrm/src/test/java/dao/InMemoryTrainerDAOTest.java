@@ -1,7 +1,7 @@
 package dao;
 
 import com.example.gymcrm.dao.inmemory.InMemoryTrainerDAO;
-import com.example.gymcrm.model.Trainer;
+import com.example.gymcrm.model.entity.Trainer;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

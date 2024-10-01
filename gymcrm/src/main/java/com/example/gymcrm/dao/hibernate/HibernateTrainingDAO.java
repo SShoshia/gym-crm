@@ -1,7 +1,7 @@
 package com.example.gymcrm.dao.hibernate;
 
 import com.example.gymcrm.dao.core.TrainingDAO;
-import com.example.gymcrm.model.Training;
+import com.example.gymcrm.model.entity.Training;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.val;

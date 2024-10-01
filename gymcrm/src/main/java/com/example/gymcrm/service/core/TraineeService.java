@@ -1,6 +1,6 @@
 package com.example.gymcrm.service.core;
 
-import com.example.gymcrm.model.Trainee;
+import com.example.gymcrm.model.entity.Trainee;
 
 import java.util.List;
 import java.util.Optional;

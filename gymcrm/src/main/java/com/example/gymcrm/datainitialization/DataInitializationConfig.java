@@ -1,9 +1,9 @@
 package com.example.gymcrm.datainitialization;
 
-import com.example.gymcrm.model.Trainee;
-import com.example.gymcrm.model.Trainer;
-import com.example.gymcrm.model.Training;
-import com.example.gymcrm.model.User;
+import com.example.gymcrm.model.entity.Trainee;
+import com.example.gymcrm.model.entity.Trainer;
+import com.example.gymcrm.model.entity.Training;
+import com.example.gymcrm.model.entity.User;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

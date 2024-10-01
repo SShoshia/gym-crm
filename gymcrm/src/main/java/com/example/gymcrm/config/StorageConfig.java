@@ -1,9 +1,9 @@
 package com.example.gymcrm.config;
 
-import com.example.gymcrm.model.Trainee;
-import com.example.gymcrm.model.Trainer;
-import com.example.gymcrm.model.Training;
-import com.example.gymcrm.model.User;
+import com.example.gymcrm.model.entity.Trainee;
+import com.example.gymcrm.model.entity.Trainer;
+import com.example.gymcrm.model.entity.Training;
+import com.example.gymcrm.model.entity.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

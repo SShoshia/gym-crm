@@ -1,7 +1,7 @@
 package service;
 
 import com.example.gymcrm.dao.core.UserDAO;
-import com.example.gymcrm.model.User;
+import com.example.gymcrm.model.entity.User;
 import com.example.gymcrm.service.core.UserService;
 import com.example.gymcrm.service.impl.UserServiceImpl;
 import lombok.val;

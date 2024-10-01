@@ -1,7 +1,7 @@
 package com.example.gymcrm.dao.inmemory;
 
 import com.example.gymcrm.dao.core.UserDAO;
-import com.example.gymcrm.model.User;
+import com.example.gymcrm.model.entity.User;
 import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

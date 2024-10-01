@@ -1,10 +1,10 @@
 package com.example.gymcrm.datainitialization;
 
 import com.example.gymcrm.fileservice.FileService;
-import com.example.gymcrm.model.Trainee;
-import com.example.gymcrm.model.Trainer;
-import com.example.gymcrm.model.Training;
-import com.example.gymcrm.model.User;
+import com.example.gymcrm.model.entity.Trainee;
+import com.example.gymcrm.model.entity.Trainer;
+import com.example.gymcrm.model.entity.Training;
+import com.example.gymcrm.model.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

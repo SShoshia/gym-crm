@@ -3,7 +3,7 @@ package com.example.gymcrm.service.impl;
 import com.example.gymcrm.dao.core.TraineeDAO;
 import com.example.gymcrm.dao.core.TrainerDAO;
 import com.example.gymcrm.dao.core.TrainingDAO;
-import com.example.gymcrm.model.Training;
+import com.example.gymcrm.model.entity.Training;
 import com.example.gymcrm.model.criteria.TrainingSearchCriteria;
 import com.example.gymcrm.service.core.TrainingService;
 import jakarta.transaction.Transactional;

@@ -1,9 +1,9 @@
 package com.example.gymcrm.facade;
 
-import com.example.gymcrm.model.Trainee;
-import com.example.gymcrm.model.Trainer;
-import com.example.gymcrm.model.Training;
-import com.example.gymcrm.model.User;
+import com.example.gymcrm.model.entity.Trainee;
+import com.example.gymcrm.model.entity.Trainer;
+import com.example.gymcrm.model.entity.Training;
+import com.example.gymcrm.model.entity.User;
 import com.example.gymcrm.model.criteria.TrainerSearchCriteria;
 import com.example.gymcrm.model.criteria.TrainingSearchCriteria;
 import com.example.gymcrm.service.core.TraineeService;

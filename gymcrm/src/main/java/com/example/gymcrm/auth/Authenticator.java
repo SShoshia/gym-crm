@@ -1,6 +1,6 @@
 package com.example.gymcrm.auth;
 
-import com.example.gymcrm.model.User;
+import com.example.gymcrm.model.entity.User;
 
 public interface Authenticator {
 

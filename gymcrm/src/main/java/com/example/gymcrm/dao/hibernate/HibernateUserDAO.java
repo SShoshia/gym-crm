@@ -1,7 +1,7 @@
 package com.example.gymcrm.dao.hibernate;
 
 import com.example.gymcrm.dao.core.UserDAO;
-import com.example.gymcrm.model.User;
+import com.example.gymcrm.model.entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
