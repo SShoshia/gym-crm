@@ -2,6 +2,8 @@ package facade;
 
 import com.example.gymcrm.facade.GymCRMFacade;
 import com.example.gymcrm.facade.GymCRMFacadeImpl;
+import com.example.gymcrm.model.criteria.TrainerSearchCriteria;
+import com.example.gymcrm.model.criteria.TrainingSearchCriteria;
 import com.example.gymcrm.model.entity.Trainee;
 import com.example.gymcrm.model.entity.Trainer;
 import com.example.gymcrm.model.entity.Training;
@@ -15,6 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -179,6 +182,49 @@ public class GymCRMFacadeImplTest {
 
         assertEquals(2, gymFacade.getAllTrainings().size());
         verify(trainingService, times(1)).getAllTrainings();
+    }
+
+    @Test
+    public void testGetTrainingsMatchingCriteria() {
+        when(trainingService.getTrainingsMatchingCriteria(any())).thenReturn(Arrays.asList(new Training(), new Training()));
+
+        val criteria = new TrainingSearchCriteria();
+        assertEquals(2, gymFacade.getTrainingsMatchingCriteria(criteria).size());
+        verify(trainingService, times(1)).getTrainingsMatchingCriteria(criteria);
+    }
+
+    @Test
+    public void testGetTrainersMatchingCriteria() {
+        when(trainerService.getTrainersMatchingCriteria(any())).thenReturn(Arrays.asList(new Trainer(), new Trainer()));
+
+        val criteria = new TrainerSearchCriteria();
+        assertEquals(2, gymFacade.getTrainersMatchingCriteria(criteria).size());
+        verify(trainerService, times(1)).getTrainersMatchingCriteria(criteria);
+
+    }
+
+    @Test
+    public void testGetTrainerByUsername() {
+        val trainer = Optional.of(new Trainer());
+        when(trainerService.getTrainerByUsername("username")).thenReturn(trainer);
+
+        assertEquals(trainer, gymFacade.getTrainerByUsername("username"));
+        verify(trainerService, times(1)).getTrainerByUsername("username");
+    }
+
+    @Test
+    public void testGetTraineeByUsername() {
+        val trainee = Optional.of(new Trainee());
+        when(traineeService.getTraineeByUsername("username")).thenReturn(trainee);
+
+        assertEquals(trainee, gymFacade.getTraineeByUsername("username"));
+        verify(traineeService, times(1)).getTraineeByUsername("username");
+    }
+
+    @Test
+    public void testDeleteTraineeByUsername() {
+        gymFacade.deleteTraineeByUsername("username");
+        verify(traineeService, times(1)).deleteTraineeByUsername("username");
     }
 
 }

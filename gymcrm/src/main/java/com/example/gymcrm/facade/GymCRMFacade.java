@@ -1,11 +1,11 @@
 package com.example.gymcrm.facade;
 
+import com.example.gymcrm.model.criteria.TrainerSearchCriteria;
+import com.example.gymcrm.model.criteria.TrainingSearchCriteria;
 import com.example.gymcrm.model.entity.Trainee;
 import com.example.gymcrm.model.entity.Trainer;
 import com.example.gymcrm.model.entity.Training;
 import com.example.gymcrm.model.entity.User;
-import com.example.gymcrm.model.criteria.TrainerSearchCriteria;
-import com.example.gymcrm.model.criteria.TrainingSearchCriteria;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,5 +54,11 @@ public interface GymCRMFacade {
     List<Training> getTrainingsMatchingCriteria(TrainingSearchCriteria criteria);
 
     List<Trainer> getTrainersMatchingCriteria(TrainerSearchCriteria criteria);
+
+    Optional<Trainer> getTrainerByUsername(String username);
+
+    Optional<Trainee> getTraineeByUsername(String username);
+
+    void deleteTraineeByUsername(String username);
 
 }

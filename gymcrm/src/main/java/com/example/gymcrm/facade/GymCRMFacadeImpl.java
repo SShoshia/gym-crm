@@ -1,11 +1,11 @@
 package com.example.gymcrm.facade;
 
+import com.example.gymcrm.model.criteria.TrainerSearchCriteria;
+import com.example.gymcrm.model.criteria.TrainingSearchCriteria;
 import com.example.gymcrm.model.entity.Trainee;
 import com.example.gymcrm.model.entity.Trainer;
 import com.example.gymcrm.model.entity.Training;
 import com.example.gymcrm.model.entity.User;
-import com.example.gymcrm.model.criteria.TrainerSearchCriteria;
-import com.example.gymcrm.model.criteria.TrainingSearchCriteria;
 import com.example.gymcrm.service.core.TraineeService;
 import com.example.gymcrm.service.core.TrainerService;
 import com.example.gymcrm.service.core.TrainingService;
@@ -134,5 +134,20 @@ public class GymCRMFacadeImpl implements GymCRMFacade {
     @Override
     public List<Trainer> getTrainersMatchingCriteria(TrainerSearchCriteria criteria) {
         return trainerService.getTrainersMatchingCriteria(criteria);
+    }
+
+    @Override
+    public Optional<Trainer> getTrainerByUsername(String username) {
+        return trainerService.getTrainerByUsername(username);
+    }
+
+    @Override
+    public Optional<Trainee> getTraineeByUsername(String username) {
+        return traineeService.getTraineeByUsername(username);
+    }
+
+    @Override
+    public void deleteTraineeByUsername(String username) {
+        traineeService.deleteTraineeByUsername(username);
     }
 }
