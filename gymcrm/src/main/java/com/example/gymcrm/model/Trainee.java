@@ -4,9 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Trainee {
@@ -23,7 +26,19 @@ public class Trainee {
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
 
+    @OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Training> trainings;
+
     public Long getUserId() {
         return user.getId();
+    }
+
+    public String getUsername() {
+        return user.getUsername();
+    }
+
+    @Override
+    public String toString() {
+        return "{ Trainee - Id: " + id + ", user id: " + user.getId() + ", address: " + address + ", date of birth: " + dateOfBirth + " }";
     }
 }

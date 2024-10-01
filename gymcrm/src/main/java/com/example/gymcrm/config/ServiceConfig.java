@@ -1,11 +1,12 @@
 package com.example.gymcrm.config;
 
+import com.example.gymcrm.auth.Authenticator;
 import com.example.gymcrm.dao.core.TraineeDAO;
 import com.example.gymcrm.dao.core.TrainerDAO;
 import com.example.gymcrm.dao.core.TrainingDAO;
 import com.example.gymcrm.dao.core.UserDAO;
-import com.example.gymcrm.service.core.TrainerService;
 import com.example.gymcrm.service.core.TraineeService;
+import com.example.gymcrm.service.core.TrainerService;
 import com.example.gymcrm.service.core.TrainingService;
 import com.example.gymcrm.service.core.UserService;
 import com.example.gymcrm.service.impl.TraineeServiceImpl;
@@ -24,13 +25,13 @@ public class ServiceConfig {
     }
 
     @Bean
-    public TraineeService traineeService(TraineeDAO traineeDAO, UserDAO userDAO) {
-        return new TraineeServiceImpl(traineeDAO, userDAO);
+    public TraineeService traineeService(TraineeDAO traineeDAO, UserDAO userDAO, Authenticator authenticator) {
+        return new TraineeServiceImpl(traineeDAO, userDAO, authenticator);
     }
 
     @Bean
-    public TrainerService trainerService(TrainerDAO trainerDAO, UserDAO userDAO) {
-        return new TrainerServiceImpl(trainerDAO, userDAO);
+    public TrainerService trainerService(TrainerDAO trainerDAO, UserDAO userDAO, Authenticator authenticator) {
+        return new TrainerServiceImpl(trainerDAO, userDAO, authenticator);
     }
 
     @Bean

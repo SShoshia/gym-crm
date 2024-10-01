@@ -2,6 +2,7 @@ package com.example.gymcrm.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.util.Date;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Training {
@@ -37,7 +39,15 @@ public class Training {
         return trainee.getId();
     }
 
+    public String getTraineeUsername() {
+        return getTrainee().getUsername();
+    }
+
     public Long getTrainerId() {
         return trainer.getId();
+    }
+
+    public String getTrainerUsername() {
+        return getTrainer().getUsername();
     }
 }

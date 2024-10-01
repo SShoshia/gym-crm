@@ -4,8 +4,10 @@ import com.example.gymcrm.model.Trainee;
 import com.example.gymcrm.model.Trainer;
 import com.example.gymcrm.model.Training;
 import com.example.gymcrm.model.User;
-import com.example.gymcrm.service.core.TrainerService;
+import com.example.gymcrm.model.criteria.TrainerSearchCriteria;
+import com.example.gymcrm.model.criteria.TrainingSearchCriteria;
 import com.example.gymcrm.service.core.TraineeService;
+import com.example.gymcrm.service.core.TrainerService;
 import com.example.gymcrm.service.core.TrainingService;
 import com.example.gymcrm.service.core.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +60,7 @@ public class GymCRMFacadeImpl implements GymCRMFacade {
 
 
     @Override
-    public void createTrainee(Trainee trainee) {
+    public void createTrainee(Trainee trainee) throws Exception {
         traineeService.createTrainee(trainee);
     }
 
@@ -73,18 +75,18 @@ public class GymCRMFacadeImpl implements GymCRMFacade {
     }
 
     @Override
-    public void updateTrainee(Trainee trainee) {
+    public void updateTrainee(Trainee trainee) throws Exception {
         traineeService.updateTrainee(trainee);
     }
 
     @Override
-    public void deleteTrainee(Long id) {
-        traineeService.deleteTrainee(id);
+    public void deleteTrainee(Trainee trainee) throws Exception {
+        traineeService.deleteTrainee(trainee);
     }
 
 
     @Override
-    public void createTrainer(Trainer trainer) {
+    public void createTrainer(Trainer trainer) throws Exception {
         trainerService.createTrainer(trainer);
     }
 
@@ -99,13 +101,13 @@ public class GymCRMFacadeImpl implements GymCRMFacade {
     }
 
     @Override
-    public void updateTrainer(Trainer trainer) {
+    public void updateTrainer(Trainer trainer) throws Exception {
         trainerService.updateTrainer(trainer);
     }
 
     @Override
-    public void deleteTrainer(Long id) {
-        trainerService.deleteTrainer(id);
+    public void deleteTrainer(Trainer trainer) throws Exception {
+        trainerService.deleteTrainer(trainer);
     }
 
 
@@ -124,4 +126,13 @@ public class GymCRMFacadeImpl implements GymCRMFacade {
         return trainingService.getAllTrainings();
     }
 
+    @Override
+    public List<Training> getTrainingsMatchingCriteria(TrainingSearchCriteria criteria) {
+        return trainingService.getTrainingsMatchingCriteria(criteria);
+    }
+
+    @Override
+    public List<Trainer> getTrainersMatchingCriteria(TrainerSearchCriteria criteria) {
+        return trainerService.getTrainersMatchingCriteria(criteria);
+    }
 }

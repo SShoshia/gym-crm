@@ -6,8 +6,8 @@ import com.example.gymcrm.model.Trainee;
 import com.example.gymcrm.model.Trainer;
 import com.example.gymcrm.model.Training;
 import com.example.gymcrm.model.User;
-import com.example.gymcrm.service.core.TrainerService;
 import com.example.gymcrm.service.core.TraineeService;
+import com.example.gymcrm.service.core.TrainerService;
 import com.example.gymcrm.service.core.TrainingService;
 import com.example.gymcrm.service.core.UserService;
 import lombok.val;
@@ -78,7 +78,7 @@ public class GymCRMFacadeImplTest {
     }
 
     @Test
-    public void testCreateTrainee() {
+    public void testCreateTrainee() throws Exception {
         Trainee trainee = new Trainee();
         gymFacade.createTrainee(trainee);
         verify(traineeService, times(1)).createTrainee(trainee);
@@ -104,20 +104,21 @@ public class GymCRMFacadeImplTest {
 
 
     @Test
-    public void testUpdateTrainee() {
+    public void testUpdateTrainee() throws Exception {
         Trainee trainee = new Trainee();
         gymFacade.updateTrainee(trainee);
         verify(traineeService, times(1)).updateTrainee(trainee);
     }
 
     @Test
-    public void testDeleteTrainee() {
-        gymFacade.deleteTrainee(1L);
-        verify(traineeService, times(1)).deleteTrainee(1L);
+    public void testDeleteTrainee() throws Exception {
+        val trainee = new Trainee();
+        gymFacade.deleteTrainee(trainee);
+        verify(traineeService, times(1)).deleteTrainee(trainee);
     }
 
     @Test
-    public void testCreateTrainer() {
+    public void testCreateTrainer() throws Exception {
         Trainer trainer = new Trainer();
         gymFacade.createTrainer(trainer);
         verify(trainerService, times(1)).createTrainer(trainer);
@@ -142,16 +143,17 @@ public class GymCRMFacadeImplTest {
     }
 
     @Test
-    public void testUpdateTrainer() {
+    public void testUpdateTrainer() throws Exception {
         Trainer trainer = new Trainer();
         gymFacade.updateTrainer(trainer);
         verify(trainerService, times(1)).updateTrainer(trainer);
     }
 
     @Test
-    public void testDeleteTrainer() {
-        gymFacade.deleteTrainer(1L);
-        verify(trainerService, times(1)).deleteTrainer(1L);
+    public void testDeleteTrainer() throws Exception {
+        val trainer = new Trainer();
+        gymFacade.deleteTrainer(trainer);
+        verify(trainerService, times(1)).deleteTrainer(trainer);
     }
 
     @Test

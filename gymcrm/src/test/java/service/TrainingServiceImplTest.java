@@ -6,14 +6,16 @@ import com.example.gymcrm.dao.core.TrainingDAO;
 import com.example.gymcrm.model.Trainee;
 import com.example.gymcrm.model.Trainer;
 import com.example.gymcrm.model.Training;
+import com.example.gymcrm.model.criteria.TrainingSearchCriteria;
 import com.example.gymcrm.service.core.TrainingService;
 import com.example.gymcrm.service.impl.TrainingServiceImpl;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +32,7 @@ public class TrainingServiceImplTest {
 
     private Training sampleTraining1;
     private Training sampleTraining2;
+    private Training sampleTraining3;
 
     @BeforeEach
     public void setUp() {
@@ -46,6 +49,10 @@ public class TrainingServiceImplTest {
         when(sampleTraining2.getId()).thenReturn(2L);
         when(sampleTraining2.getTraineeId()).thenReturn(2L);
         when(sampleTraining2.getTrainerId()).thenReturn(2L);
+        sampleTraining3 = mock(Training.class);
+        when(sampleTraining3.getId()).thenReturn(3L);
+        when(sampleTraining3.getTraineeId()).thenReturn(3L);
+        when(sampleTraining3.getTrainerId()).thenReturn(3L);
     }
 
     @Test
@@ -75,6 +82,36 @@ public class TrainingServiceImplTest {
         assertEquals(2, result.size());
         assertEquals(sampleTraining1, result.get(0));
         assertEquals(sampleTraining2, result.get(1));
+    }
+
+
+    @Test
+    public void testGetTrainingsMatchingCriteria() {
+        when(trainingDAO.findAll()).thenReturn(List.of(sampleTraining1, sampleTraining2, sampleTraining3));
+        when(sampleTraining1.getTraineeUsername()).thenReturn("username2");
+        when(sampleTraining1.getTrainingType()).thenReturn("type 2");
+        when(sampleTraining2.getTraineeUsername()).thenReturn("username1");
+        when(sampleTraining2.getTrainingType()).thenReturn("type 1");
+        when(sampleTraining3.getTraineeUsername()).thenReturn("username3");
+        when(sampleTraining3.getTrainingType()).thenReturn("type 1");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        val dateNow = calendar.getTime();
+        calendar.add(Calendar.DAY_OF_MONTH, 5);
+        val futureDate = new Date(calendar.getTime().getTime());
+        calendar.add(Calendar.DAY_OF_MONTH, -15);
+        val pastDate = new Date(calendar.getTime().getTime());
+
+        when(sampleTraining1.getTrainingDate()).thenReturn(pastDate);
+        when(sampleTraining2.getTrainingDate()).thenReturn(dateNow);
+        when(sampleTraining3.getTrainingDate()).thenReturn(futureDate);
+
+        val criteria = TrainingSearchCriteria.builder().traineeUsername("username1").trainingType("type 1").dateFrom(pastDate).dateTo(futureDate).build();
+
+        val result = trainingService.getTrainingsMatchingCriteria(criteria);
+        assertEquals(1, result.size());
+        assertEquals(sampleTraining2, result.get(0));
     }
 
 }

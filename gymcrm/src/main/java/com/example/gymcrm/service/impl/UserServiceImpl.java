@@ -4,6 +4,7 @@ import com.example.gymcrm.dao.core.UserDAO;
 import com.example.gymcrm.model.User;
 import com.example.gymcrm.service.core.UserService;
 import com.example.gymcrm.util.UserUtils;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Transactional
 @Service
 public class UserServiceImpl implements UserService {
 

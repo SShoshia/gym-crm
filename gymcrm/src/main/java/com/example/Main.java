@@ -6,12 +6,14 @@ import com.example.gymcrm.model.Trainee;
 import com.example.gymcrm.model.Trainer;
 import com.example.gymcrm.model.Training;
 import com.example.gymcrm.model.User;
+import jakarta.transaction.Transactional;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Date;
 
+@Transactional
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         GymCRMFacade facade = context.getBean(GymCRMFacade.class);
 

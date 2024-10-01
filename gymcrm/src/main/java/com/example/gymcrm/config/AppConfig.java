@@ -1,6 +1,9 @@
 package com.example.gymcrm.config;
 
 
+import com.example.gymcrm.auth.Authenticator;
+import com.example.gymcrm.auth.AuthenticatorImpl;
+import com.example.gymcrm.dao.core.UserDAO;
 import com.example.gymcrm.datainitialization.DataInitializationConfig;
 import com.example.gymcrm.datainitialization.DataInitializer;
 import com.example.gymcrm.facade.GymCRMFacade;
@@ -50,6 +53,11 @@ public class AppConfig {
     @Bean
     public DataInitializationConfig dataInitializationConfig(Map<Long, User> userStorage, Map<Long, Trainee> traineeStorage, Map<Long, Trainer> trainerStorage, Map<Long, Training> trainingStorage, DataInitializer dataInitializer) {
         return new DataInitializationConfig(userStorage, traineeStorage, trainerStorage, trainingStorage, dataInitializer);
+    }
+
+    @Bean
+    public Authenticator authenticator(UserDAO userDAO) {
+        return new AuthenticatorImpl(userDAO);
     }
 
 }
