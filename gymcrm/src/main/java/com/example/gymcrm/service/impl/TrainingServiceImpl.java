@@ -63,8 +63,8 @@ public class TrainingServiceImpl implements TrainingService {
         return trainingDAO.findAll().stream().filter(training ->
                 (criteria.getTraineeUsername() == null || Objects.equals(training.getTraineeUsername(), criteria.getTraineeUsername()))
                         && (criteria.getTrainerUsername() == null || Objects.equals(training.getTrainerUsername(), criteria.getTrainerUsername()))
-                        && (criteria.getDateFrom() == null || training.getTrainingDate().after(criteria.getDateFrom()))
-                        && (criteria.getDateTo() == null || training.getTrainingDate().before(criteria.getDateTo()))
+                        && (criteria.getDateFrom() == null || training.getTrainingDate().isAfter(criteria.getDateFrom()))
+                        && (criteria.getDateTo() == null || training.getTrainingDate().isBefore(criteria.getDateTo()))
                         && (criteria.getTrainingType() == null || Objects.equals(training.getTrainingType(), criteria.getTrainingType()))
         ).toList();
     }

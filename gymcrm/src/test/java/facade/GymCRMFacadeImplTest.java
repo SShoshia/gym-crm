@@ -17,7 +17,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,7 +44,7 @@ public class GymCRMFacadeImplTest {
     public void testCreateUser() {
         User user = new User();
         gymFacade.createUser(user);
-        verify(userService, times(1)).createUser(user);
+        verify(userService).createUser(user);
     }
 
     @Test
@@ -55,7 +54,7 @@ public class GymCRMFacadeImplTest {
 
         val result = gymFacade.getUser(1L);
         assertTrue(result.isPresent());
-        verify(userService, times(1)).getUser(1L);
+        verify(userService).getUser(1L);
     }
 
     @Test
@@ -63,7 +62,7 @@ public class GymCRMFacadeImplTest {
         when(userService.getAllUsers()).thenReturn(Arrays.asList(new User(), new User()));
 
         assertEquals(2, gymFacade.getAllUsers().size());
-        verify(userService, times(1)).getAllUsers();
+        verify(userService).getAllUsers();
     }
 
 
@@ -71,20 +70,20 @@ public class GymCRMFacadeImplTest {
     public void testUpdateUser() {
         User user = new User();
         gymFacade.updateUser(user);
-        verify(userService, times(1)).updateUser(user);
+        verify(userService).updateUser(user);
     }
 
     @Test
     public void testDeleteUser() {
         gymFacade.deleteUser(1L);
-        verify(userService, times(1)).deleteUser(1L);
+        verify(userService).deleteUser(1L);
     }
 
     @Test
     public void testCreateTrainee() throws Exception {
         Trainee trainee = new Trainee();
         gymFacade.createTrainee(trainee);
-        verify(traineeService, times(1)).createTrainee(trainee);
+        verify(traineeService).createTrainee(trainee);
     }
 
     @Test
@@ -94,7 +93,7 @@ public class GymCRMFacadeImplTest {
 
         val result = gymFacade.getTrainee(1L);
         assertTrue(result.isPresent());
-        verify(traineeService, times(1)).getTrainee(1L);
+        verify(traineeService).getTrainee(1L);
     }
 
     @Test
@@ -102,7 +101,7 @@ public class GymCRMFacadeImplTest {
         when(traineeService.getAllTrainees()).thenReturn(Arrays.asList(new Trainee(), new Trainee()));
 
         assertEquals(2, gymFacade.getAllTrainees().size());
-        verify(traineeService, times(1)).getAllTrainees();
+        verify(traineeService).getAllTrainees();
     }
 
 
@@ -110,21 +109,21 @@ public class GymCRMFacadeImplTest {
     public void testUpdateTrainee() throws Exception {
         Trainee trainee = new Trainee();
         gymFacade.updateTrainee(trainee);
-        verify(traineeService, times(1)).updateTrainee(trainee);
+        verify(traineeService).updateTrainee(trainee);
     }
 
     @Test
     public void testDeleteTrainee() throws Exception {
         val trainee = new Trainee();
         gymFacade.deleteTrainee(trainee);
-        verify(traineeService, times(1)).deleteTrainee(trainee);
+        verify(traineeService).deleteTrainee(trainee);
     }
 
     @Test
     public void testCreateTrainer() throws Exception {
         Trainer trainer = new Trainer();
         gymFacade.createTrainer(trainer);
-        verify(trainerService, times(1)).createTrainer(trainer);
+        verify(trainerService).createTrainer(trainer);
     }
 
     @Test
@@ -134,7 +133,7 @@ public class GymCRMFacadeImplTest {
 
         val result = gymFacade.getTrainer(1L);
         assertTrue(result.isPresent());
-        verify(trainerService, times(1)).getTrainer(1L);
+        verify(trainerService).getTrainer(1L);
     }
 
     @Test
@@ -142,28 +141,28 @@ public class GymCRMFacadeImplTest {
         when(trainerService.getAllTrainers()).thenReturn(Arrays.asList(new Trainer(), new Trainer()));
 
         assertEquals(2, gymFacade.getAllTrainers().size());
-        verify(trainerService, times(1)).getAllTrainers();
+        verify(trainerService).getAllTrainers();
     }
 
     @Test
     public void testUpdateTrainer() throws Exception {
         Trainer trainer = new Trainer();
         gymFacade.updateTrainer(trainer);
-        verify(trainerService, times(1)).updateTrainer(trainer);
+        verify(trainerService).updateTrainer(trainer);
     }
 
     @Test
     public void testDeleteTrainer() throws Exception {
         val trainer = new Trainer();
         gymFacade.deleteTrainer(trainer);
-        verify(trainerService, times(1)).deleteTrainer(trainer);
+        verify(trainerService).deleteTrainer(trainer);
     }
 
     @Test
     public void testCreateTraining() {
         Training training = new Training();
         gymFacade.createTraining(training);
-        verify(trainingService, times(1)).createTraining(training);
+        verify(trainingService).createTraining(training);
     }
 
     @Test
@@ -173,7 +172,7 @@ public class GymCRMFacadeImplTest {
 
         val result = gymFacade.getTraining(1L);
         assertTrue(result.isPresent());
-        verify(trainingService, times(1)).getTraining(1L);
+        verify(trainingService).getTraining(1L);
     }
 
     @Test
@@ -181,7 +180,7 @@ public class GymCRMFacadeImplTest {
         when(trainingService.getAllTrainings()).thenReturn(Arrays.asList(new Training(), new Training()));
 
         assertEquals(2, gymFacade.getAllTrainings().size());
-        verify(trainingService, times(1)).getAllTrainings();
+        verify(trainingService).getAllTrainings();
     }
 
     @Test
@@ -190,7 +189,7 @@ public class GymCRMFacadeImplTest {
 
         val criteria = new TrainingSearchCriteria();
         assertEquals(2, gymFacade.getTrainingsMatchingCriteria(criteria).size());
-        verify(trainingService, times(1)).getTrainingsMatchingCriteria(criteria);
+        verify(trainingService).getTrainingsMatchingCriteria(criteria);
     }
 
     @Test
@@ -199,7 +198,7 @@ public class GymCRMFacadeImplTest {
 
         val criteria = new TrainerSearchCriteria();
         assertEquals(2, gymFacade.getTrainersMatchingCriteria(criteria).size());
-        verify(trainerService, times(1)).getTrainersMatchingCriteria(criteria);
+        verify(trainerService).getTrainersMatchingCriteria(criteria);
 
     }
 
@@ -209,7 +208,7 @@ public class GymCRMFacadeImplTest {
         when(trainerService.getTrainerByUsername("username")).thenReturn(trainer);
 
         assertEquals(trainer, gymFacade.getTrainerByUsername("username"));
-        verify(trainerService, times(1)).getTrainerByUsername("username");
+        verify(trainerService).getTrainerByUsername("username");
     }
 
     @Test
@@ -218,13 +217,13 @@ public class GymCRMFacadeImplTest {
         when(traineeService.getTraineeByUsername("username")).thenReturn(trainee);
 
         assertEquals(trainee, gymFacade.getTraineeByUsername("username"));
-        verify(traineeService, times(1)).getTraineeByUsername("username");
+        verify(traineeService).getTraineeByUsername("username");
     }
 
     @Test
     public void testDeleteTraineeByUsername() {
         gymFacade.deleteTraineeByUsername("username");
-        verify(traineeService, times(1)).deleteTraineeByUsername("username");
+        verify(traineeService).deleteTraineeByUsername("username");
     }
 
 }

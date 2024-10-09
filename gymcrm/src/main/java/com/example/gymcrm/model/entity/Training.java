@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -31,7 +31,7 @@ public class Training {
     private String trainingType;
 
     @Temporal(TemporalType.DATE)
-    private Date trainingDate;
+    private LocalDate trainingDate;
 
     private int trainingDuration;
 

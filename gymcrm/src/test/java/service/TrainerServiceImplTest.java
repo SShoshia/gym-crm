@@ -55,7 +55,7 @@ public class TrainerServiceImplTest {
     public void testCreateTrainerCallsDaoMethodOnArgument() throws Exception {
         when(userDAO.findById(sampleTrainer1.getUserId())).thenReturn(Optional.of(new User()));
         trainerService.createTrainer(sampleTrainer1);
-        verify(trainerDAO, times(1)).create(sampleTrainer1);
+        verify(trainerDAO).create(sampleTrainer1);
     }
 
     @Test
@@ -92,13 +92,13 @@ public class TrainerServiceImplTest {
         trainerService.createTrainer(sampleTrainer1);
 
         trainerService.updateTrainer(sampleTrainer1);
-        verify(trainerDAO, times(1)).update(sampleTrainer1);
+        verify(trainerDAO).update(sampleTrainer1);
     }
 
     @Test
     public void testDeleteTrainerCallsDaoMethodOnArgument() throws Exception {
         trainerService.deleteTrainer(sampleTrainer1);
-        verify(trainerDAO, times(1)).delete(sampleTrainer1.getId());
+        verify(trainerDAO).delete(sampleTrainer1.getId());
     }
 
     @Test

@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -14,7 +14,7 @@ import java.util.Date;
 public class TrainingSearchCriteria {
     String traineeUsername;
     String trainerUsername;
-    Date dateFrom;
-    Date dateTo;
+    LocalDate dateFrom;
+    LocalDate dateTo;
     String trainingType;
 }

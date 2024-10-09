@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,13 +40,13 @@ public class TraineeServiceImplTest {
         when(sampleTrainee1.getId()).thenReturn(1L);
         when(sampleTrainee1.getUserId()).thenReturn(1L);
         when(sampleTrainee1.getAddress()).thenReturn("1 example street");
-        when(sampleTrainee1.getDateOfBirth()).thenReturn(new Date());
+        when(sampleTrainee1.getDateOfBirth()).thenReturn(LocalDate.now());
         when(sampleTrainee1.getUser()).thenReturn(new User());
         sampleTrainee2 = mock();
         when(sampleTrainee2.getId()).thenReturn(2L);
         when(sampleTrainee2.getUserId()).thenReturn(2L);
         when(sampleTrainee2.getAddress()).thenReturn("2 example street");
-        when(sampleTrainee2.getDateOfBirth()).thenReturn(new Date());
+        when(sampleTrainee2.getDateOfBirth()).thenReturn(LocalDate.now());
         when(sampleTrainee2.getUser()).thenReturn(new User());
 
         when(authenticator.authenticate(any())).thenReturn(true);
@@ -56,7 +56,7 @@ public class TraineeServiceImplTest {
     public void testCreateTraineeCallsDaoMethodOnArgument() throws Exception {
         when(userDAO.findById(sampleTrainee1.getUserId())).thenReturn(Optional.of(new User()));
         traineeService.createTrainee(sampleTrainee1);
-        verify(traineeDAO, times(1)).create(sampleTrainee1);
+        verify(traineeDAO).create(sampleTrainee1);
     }
 
     @Test
@@ -93,14 +93,14 @@ public class TraineeServiceImplTest {
         traineeService.createTrainee(sampleTrainee1);
 
         traineeService.updateTrainee(sampleTrainee1);
-        verify(traineeDAO, times(1)).update(sampleTrainee1);
+        verify(traineeDAO).update(sampleTrainee1);
     }
 
     @Test
     public void testDeleteTraineeCallsDaoMethodOnArgument() throws Exception {
         when(traineeDAO.findById(1L)).thenReturn(Optional.of(sampleTrainee1));
         traineeService.deleteTrainee(sampleTrainee1);
-        verify(traineeDAO, times(1)).delete(1L);
+        verify(traineeDAO).delete(1L);
     }
 
     @Test
@@ -128,7 +128,7 @@ public class TraineeServiceImplTest {
         when(sampleTrainee2.getUsername()).thenReturn("username2");
 
         traineeService.deleteTraineeByUsername(sampleTrainee1.getUsername());
-        verify(traineeDAO, times(1)).delete(sampleTrainee1.getId());
+        verify(traineeDAO).delete(sampleTrainee1.getId());
     }
 
 }

@@ -3,10 +3,10 @@ package service;
 import com.example.gymcrm.dao.core.TraineeDAO;
 import com.example.gymcrm.dao.core.TrainerDAO;
 import com.example.gymcrm.dao.core.TrainingDAO;
+import com.example.gymcrm.model.criteria.TrainingSearchCriteria;
 import com.example.gymcrm.model.entity.Trainee;
 import com.example.gymcrm.model.entity.Trainer;
 import com.example.gymcrm.model.entity.Training;
-import com.example.gymcrm.model.criteria.TrainingSearchCriteria;
 import com.example.gymcrm.service.core.TrainingService;
 import com.example.gymcrm.service.impl.TrainingServiceImpl;
 import lombok.val;
@@ -14,8 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,7 +59,7 @@ public class TrainingServiceImplTest {
         when(traineeDAO.findById(sampleTraining1.getTraineeId())).thenReturn(Optional.of(new Trainee()));
         when(trainerDAO.findById(sampleTraining1.getTrainerId())).thenReturn(Optional.of(new Trainer()));
         trainingService.createTraining(sampleTraining1);
-        verify(trainingDAO, times(1)).create(sampleTraining1);
+        verify(trainingDAO).create(sampleTraining1);
     }
 
     @Test
@@ -95,13 +94,9 @@ public class TrainingServiceImplTest {
         when(sampleTraining3.getTraineeUsername()).thenReturn("username3");
         when(sampleTraining3.getTrainingType()).thenReturn("type 1");
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        val dateNow = calendar.getTime();
-        calendar.add(Calendar.DAY_OF_MONTH, 5);
-        val futureDate = new Date(calendar.getTime().getTime());
-        calendar.add(Calendar.DAY_OF_MONTH, -15);
-        val pastDate = new Date(calendar.getTime().getTime());
+        val dateNow = LocalDate.now();
+        val futureDate = LocalDate.now().plusDays(5);
+        val pastDate = LocalDate.now().plusDays(-15);
 
         when(sampleTraining1.getTrainingDate()).thenReturn(pastDate);
         when(sampleTraining2.getTrainingDate()).thenReturn(dateNow);

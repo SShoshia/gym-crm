@@ -42,7 +42,7 @@ public class UserServiceImplTest {
     @Test
     public void testCreateUserCallsDaoMethodOnArgument() {
         userService.createUser(sampleUser1);
-        verify(userDAO, times(1)).create(sampleUser1);
+        verify(userDAO).create(sampleUser1);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class UserServiceImplTest {
         when(userDAO.findById(sampleUser1.getId())).thenReturn(Optional.of(sampleUser1));
 
         userService.updateUser(sampleUser1);
-        verify(userDAO, times(1)).update(sampleUser1);
+        verify(userDAO).update(sampleUser1);
     }
 
     @Test
@@ -79,7 +79,7 @@ public class UserServiceImplTest {
         when(userDAO.findById(sampleUser1.getId())).thenReturn(Optional.of(sampleUser1));
 
         userService.deleteUser(1L);
-        verify(userDAO, times(1)).delete(1L);
+        verify(userDAO).delete(1L);
     }
 
     @Test
