@@ -13,7 +13,7 @@ public interface TraineeService {
 
     List<Trainee> getAllTrainees();
 
-    void updateTrainee(Trainee trainee) throws Exception;
+    Trainee updateTrainee(Trainee trainee) throws Exception;
 
     void deleteTrainee(Trainee trainee) throws Exception;
 

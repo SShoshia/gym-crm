@@ -13,7 +13,7 @@ public interface TraineeDAO {
 
     List<Trainee> findAll();
 
-    void update(Trainee trainee);
+    Trainee update(Trainee trainee);
 
     void delete(Long id);
 

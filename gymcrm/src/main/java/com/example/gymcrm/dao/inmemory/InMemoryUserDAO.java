@@ -30,7 +30,7 @@ public class InMemoryUserDAO implements UserDAO {
     }
 
     @Override
-    public synchronized void create(User user) {
+    public synchronized User create(User user) {
         Long id = idCounter.getAndIncrement();
         while (userStorage.containsKey(id)) {
             id = idCounter.getAndIncrement();
@@ -39,6 +39,7 @@ public class InMemoryUserDAO implements UserDAO {
 
         userStorage.put(id, user);
         logger.info("Created user {}", user);
+        return user;
     }
 
     @Override

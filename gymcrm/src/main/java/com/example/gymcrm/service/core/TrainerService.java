@@ -14,7 +14,7 @@ public interface TrainerService {
 
     List<Trainer> getAllTrainers();
 
-    void updateTrainer(Trainer trainer) throws Exception;
+    Trainer updateTrainer(Trainer trainer) throws Exception;
 
     void deleteTrainer(Trainer trainer) throws Exception;
 

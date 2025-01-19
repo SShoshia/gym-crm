@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TrainerSearchCriteria {
     String traineeUsernameNotAssigned;
+    Boolean isActive;
 }

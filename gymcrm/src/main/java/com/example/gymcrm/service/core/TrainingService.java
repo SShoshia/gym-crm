@@ -16,4 +16,5 @@ public interface TrainingService {
 
     List<Training> getTrainingsMatchingCriteria(TrainingSearchCriteria criteria);
 
+
 }

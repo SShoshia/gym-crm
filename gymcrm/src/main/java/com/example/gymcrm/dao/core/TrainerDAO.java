@@ -13,7 +13,7 @@ public interface TrainerDAO {
 
     List<Trainer> findAll();
 
-    void update(Trainer trainer);
+    Trainer update(Trainer trainer);
 
     void delete(Long id);
 

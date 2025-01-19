@@ -3,8 +3,8 @@ package com.example.gymcrm.service.impl;
 import com.example.gymcrm.auth.Authenticator;
 import com.example.gymcrm.dao.core.TrainerDAO;
 import com.example.gymcrm.dao.core.UserDAO;
-import com.example.gymcrm.model.entity.Trainer;
 import com.example.gymcrm.model.criteria.TrainerSearchCriteria;
+import com.example.gymcrm.model.entity.Trainer;
 import com.example.gymcrm.service.core.TrainerService;
 import jakarta.transaction.Transactional;
 import lombok.val;
@@ -59,7 +59,7 @@ public class TrainerServiceImpl implements TrainerService {
     }
 
     @Override
-    public void updateTrainer(Trainer trainer) throws Exception {
+    public Trainer updateTrainer(Trainer trainer) throws Exception {
         if (trainer.getUser() == null || trainer.getSpecialization() == null) {
             error(logger, "Update trainer - Provided trainer has null field(s). Trainer: " + trainer, IllegalArgumentException.class);
         }
@@ -70,10 +70,11 @@ public class TrainerServiceImpl implements TrainerService {
 
         if (trainer.getId() != null && trainerDAO.findById(trainer.getId()).isPresent() &&
                 trainer.getUserId() != null && userDAO.findById(trainer.getUserId()).isPresent()) {
-            trainerDAO.update(trainer);
+            return trainerDAO.update(trainer);
         } else {
             error(logger, "Error while updating trainer. Trainer: " + trainer, RuntimeException.class);
         }
+        return null;
     }
 
     @Override
@@ -87,12 +88,15 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public List<Trainer> getTrainersMatchingCriteria(TrainerSearchCriteria criteria) {
-        return criteria.getTraineeUsernameNotAssigned() == null ? trainerDAO.findAll()
+        return ((criteria.getTraineeUsernameNotAssigned() == null)
+                ? (trainerDAO.findAll()).stream()
                 : trainerDAO.findAll().stream().filter(trainer ->
                 trainer.getTrainings().stream().noneMatch(training ->
                         training.getTraineeUsername().equals(criteria.getTraineeUsernameNotAssigned())
-                )
-        ).toList();
+                ))
+        ).filter(trainer -> criteria.getIsActive() == null
+                        || trainer.getUser().getIsActive() == criteria.getIsActive())
+                .toList();
     }
 
     @Override

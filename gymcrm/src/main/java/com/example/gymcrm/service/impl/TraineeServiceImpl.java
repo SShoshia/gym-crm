@@ -58,7 +58,7 @@ public class TraineeServiceImpl implements TraineeService {
     }
 
     @Override
-    public void updateTrainee(Trainee trainee) throws Exception {
+    public Trainee updateTrainee(Trainee trainee) throws Exception {
         if (trainee.getUser() == null || trainee.getAddress() == null || trainee.getDateOfBirth() == null) {
             error(logger, "Update trainee - Provided trainee has null field(s). Trainee: " + trainee, IllegalArgumentException.class);
         }
@@ -69,10 +69,11 @@ public class TraineeServiceImpl implements TraineeService {
 
         if (trainee.getId() != null && traineeDAO.findById(trainee.getId()).isPresent() &&
                 trainee.getUserId() != null && userDAO.findById(trainee.getUserId()).isPresent()) {
-            traineeDAO.update(trainee);
+            return traineeDAO.update(trainee);
         } else {
             error(logger, "Error while updating trainee. Trainee: " + trainee, RuntimeException.class);
         }
+        return null;
     }
 
     @Override

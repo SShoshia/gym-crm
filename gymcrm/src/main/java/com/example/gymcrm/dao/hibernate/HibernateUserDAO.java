@@ -28,9 +28,11 @@ public class HibernateUserDAO implements UserDAO {
     }
 
     @Override
-    public void create(User user) {
+    public User create(User user) {
         entityManager.persist(user);
+        entityManager.flush();
         logger.info("Created user {}", user);
+        return user;
     }
 
     @Override

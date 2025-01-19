@@ -47,9 +47,10 @@ public class HibernateTrainerDAO implements TrainerDAO {
     }
 
     @Override
-    public void update(Trainer trainer) {
-        entityManager.merge(trainer);
+    public Trainer update(Trainer trainer) {
+        val res = entityManager.merge(trainer);
         logger.info("Updated Trainer {}", trainer);
+        return res;
     }
 
     @Override

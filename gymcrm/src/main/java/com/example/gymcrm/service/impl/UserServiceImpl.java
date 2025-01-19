@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUser(User user) {
+    public User createUser(User user) {
         String username = UserUtils.generateUsername(user.getFirstName(), user.getLastName());
         boolean usernameExists = userDAO.findByUsername(username).isPresent();
         if (usernameExists) {
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(UserUtils.generatePassword());
         logger.info("Set random {}-symbol password for pending user.", user.getPassword().length());
 
-        userDAO.create(user);
+        return userDAO.create(user);
     }
 
     @Override
@@ -71,6 +71,11 @@ public class UserServiceImpl implements UserService {
         } else {
             error("Delete user: user with specified ID not found. ID: " + id);
         }
+    }
+
+    @Override
+    public Optional<User> getUserByUsername(String username) {
+        return userDAO.findByUsername(username);
     }
 
     private void error(String errorMessage) {

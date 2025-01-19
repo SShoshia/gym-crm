@@ -55,9 +55,10 @@ public class InMemoryTraineeDAO implements TraineeDAO {
     }
 
     @Override
-    public synchronized void update(Trainee trainee) {
-        traineeStorage.put(trainee.getUserId(), trainee);
+    public synchronized Trainee update(Trainee trainee) {
+        traineeStorage.put(trainee.getId(), trainee);
         logger.info("Updated Trainee {}", trainee);
+        return traineeStorage.get(trainee.getId());
     }
 
     @Override

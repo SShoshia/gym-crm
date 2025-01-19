@@ -51,9 +51,10 @@ public class HibernateTraineeDAO implements TraineeDAO {
     }
 
     @Override
-    public void update(Trainee trainee) {
-        entityManager.merge(trainee);
+    public Trainee update(Trainee trainee) {
+        val res = entityManager.merge(trainee);
         logger.info("Updated Trainee {}", trainee);
+        return res;
     }
 
     @Override

@@ -54,9 +54,10 @@ public class InMemoryTrainerDAO implements TrainerDAO {
     }
 
     @Override
-    public synchronized void update(Trainer trainer) {
+    public synchronized Trainer update(Trainer trainer) {
         trainerStorage.put(trainer.getUserId(), trainer);
         logger.info("Updated Trainer {}", trainer);
+        return trainerStorage.get(trainer.getId());
     }
 
     @Override
